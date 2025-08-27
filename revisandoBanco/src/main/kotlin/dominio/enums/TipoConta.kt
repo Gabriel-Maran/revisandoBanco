@@ -1,0 +1,5 @@
+package dominio.enums
+
+enum class TipoConta {
+    CORRENTE, POUPANÇA, SALÁRIO, DIGITAL, EMPRESARIAL,  UNIVERSITARIA,  MENORIDADE, CONJUNTA
+}
