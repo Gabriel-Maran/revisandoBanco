@@ -2,8 +2,10 @@ package dominio.entidades
 
 import dominio.enums.Material
 import java.math.BigDecimal
+import java.util.UUID
 
 class CaixaDAgua(
+    val idCaixa:UUID,
     val capacidade: Int,
     var material: Material,
     var interno: Boolean,
