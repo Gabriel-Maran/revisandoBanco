@@ -1,14 +1,12 @@
 package repository
 
+import connection.EntidadeJDBC
 import dominio.entidades.CaixaDAgua
 import dominio.enums.Material
 import java.math.BigDecimal
 import java.util.*
 
 fun createCaixa() {
-    /*idCaixa:UUID*/
-    val idCaixa:UUID = UUID.randomUUID()
-
     /*capacidade: Int,*/
     println("Digite a capacidade da caixa d'água")
     val capacidade: Int = readln().toInt()
@@ -29,21 +27,6 @@ fun createCaixa() {
         5 -> Material.OUTRO
         else -> Material.OUTRO
     }
-
-    /*interno: Boolean*/
-    println("Tem interno?(1 = sim, 2 = não)")
-    val interno: Boolean = when (readln().toInt()) {
-        1 -> true
-        2 -> false
-        else -> false
-    }
-
-    /*dimensao: Array<Double>*/
-    println("Altura")
-    val altura = readln().toDouble()
-    println("Raio da Base")
-    val raioBase = readln().toDouble()
-    val dimensao: Array<Double> = arrayOf(altura, raioBase)
 
     /*peso: Double*/
     println("Qual o peso da caixa d'água?")
@@ -69,29 +52,44 @@ fun createCaixa() {
     println("Qual o preço da caixa d'água")
     val preco:BigDecimal = readln().toBigDecimal()
 
-    /*isInstalada: Boolean*/
-    println("Está instalada?(1 = sim, 2 = não)")
-    val isInstalada: Boolean = when (readln().toInt()) {
-        1 -> true
-        2 -> false
-        else -> false
-    }
 
     val novaCaixa: CaixaDAgua = CaixaDAgua(
-        idCaixa = idCaixa,
         capacidade = capacidade,
         material = material,
-        interno = interno,
-        dimensao = dimensao,
         peso = peso,
         marca = marca,
         cor = cor,
         tampa = tampa,
         preco = preco,
-        isInstalada = isInstalada
     )
 }
-fun editarCaixa(id: UUID, caixa: CaixaDAgua) {
+
+fun criarTabelaCaixa(){
+    val conectar = EntidadeJDBC(
+        url = "jdbc:postgresql://localhost:5433/exemploHuilson",
+        usuario = "postgres",
+        senha = "root"
+    )
+
+    val banco = conectar.connectarComBanco()
+    val sql = "CREATE TABLE IF NOT EXISTS CaixaDAgua (" +
+            "id serial NOT NULL PRIMARY KEY, " +
+            "material varchar(255) NOT NULL, " +
+            "capacidade int NOT NULL, " +
+            "peso float NOT NULL, " +
+            "marca varchar(255) NOT NULL, " +
+            "cor varchar(255) NOT NULL, " +
+            "tampa boolean NOT NULL, " +
+            "preco varchar(255) NOT NULL" +
+            ");"
+
+    val enviarParaBanco = banco!!.createStatement().execute(sql)
+
+    println(enviarParaBanco)
+    banco.close()
+}
+
+fun editarCaixa(caixa: CaixaDAgua) {
 
 }
 
@@ -99,7 +97,7 @@ fun listarCaixas() {
 
 }
 
-fun deleteCaixas(id: UUID) {
+fun deleteCaixas() {
 
 }
 
