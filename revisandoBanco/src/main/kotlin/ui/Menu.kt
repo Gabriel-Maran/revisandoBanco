@@ -1,5 +1,9 @@
 package ui
 
+import repository.createCaixa
+import repository.deleteCaixas
+import repository.listarCaixas
+
 fun menu() {
     var opcao = 0
     do {
@@ -12,11 +16,12 @@ fun menu() {
 
         when (opcao) {
             0 -> println("Saindo....")
-            1 -> println("Cadastrando caixa...")
+            1 -> createCaixa()
             2 -> println("Editando caixa...")
-            3 -> println("Listar caixas...")
-            4 -> println("Excluindo caixa...")
+            3 -> listarCaixas()
+            4 -> deleteCaixas()
             else -> println("Opção inválida")
         }
     } while (opcao != 0)
 }
+

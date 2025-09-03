@@ -13,7 +13,6 @@ class EntidadeJDBC(
             val conexao: Connection = DriverManager.getConnection(
                 this.url, this.usuario, this.senha
             )
-            println("Conectou ao banco de dados")
             return conexao
         } catch (e : Exception){
             println(e.printStackTrace())
