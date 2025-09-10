@@ -8,7 +8,7 @@ fun menu() {
         println("1- Cadastrar Caixas D'Água")
         println("2- Editar Caixas D'Água")
         println("3- Listar Caixas D'Água")
-        println("4- Listar Caixa D'Água por Id")
+        println("4- Verificar Caixa D'Água por Id")
         println("5- Excluir Caixas D'Água")
         println("0- Sair")
         opcao = readln().toInt()
